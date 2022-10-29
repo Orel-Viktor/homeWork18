@@ -1,3 +1,4 @@
+
 'use sctrict'
 
 import './style.css'
@@ -69,3 +70,4 @@ $(function () {
 // nextSlideBtn.on('click', function(){
 // modalContentImg('src', )
 // })
+
