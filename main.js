@@ -23,7 +23,6 @@ $(function () {
 
   nextSlideBtn.on("click", function () {
     const currentItem = clearCurrentSlide();
-    console.log(currentItem)
     showNewSlide(
       currentItem.next().length ? currentItem.next() : $(slideItems[0])
     );
