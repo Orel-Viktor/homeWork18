@@ -23,6 +23,7 @@ $(function () {
 
   nextSlideBtn.on("click", function () {
     const currentItem = clearCurrentSlide();
+    console.log(currentItem)
     showNewSlide(
       currentItem.next().length ? currentItem.next() : $(slideItems[0])
     );
@@ -30,11 +31,7 @@ $(function () {
 
   prevSlideBtn.on("click", function () {
     const currentItem = clearCurrentSlide();
-    showNewSlide(
-      currentItem.prev().length
-        ? currentItem.prev()
-        : $(slideItems[slideItems.length - 1])
-    );
+    showNewSlide( currentItem.prev().length ? currentItem.prev(): $(slideItems[slideItems.length - 1]));
   });
 
   const clearCurrentSlide = () => {
