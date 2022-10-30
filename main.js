@@ -8,7 +8,13 @@ $(function () {
   const nextSlideBtn = $(".js--modal__next");
   const prevSlideBtn = $(".js--modal__prev");
   const modalContent = $(".js--modal__content");
-  const closeModalBtn = $('.js--modal__close')
+  const closeModalBtn = $('.js--modal__close');
+
+  $('.js--modal').on("click", function (event) {
+    if (this === event.target) {
+      closeModal()
+    }
+  })
   
   slideItems.on("click", function () {
     $(".js--modal").addClass("active");
@@ -38,10 +44,12 @@ $(function () {
     modalContent.append(nextImage);
   }
   
-  closeModalBtn.on('click', function(){
+  closeModalBtn.on('click', closeModal)
+
+  function closeModal () {
     $(".js--modal").removeClass('active')
     clearCurrentSlide()
-  })
+  }
 
 });
 
