@@ -1,73 +1,47 @@
+"use sctrict";
 
-'use sctrict'
-
-import './style.css'
-import $ from 'jquery'
-
-
-
+import "./style.css";
+import $ from "jquery";
 
 $(function () {
-  const gallery = $('.js--gallery')
-  const slideItem = $('.js--gal_item')
-  const nextSlideBtn = $('.js--modal__next')
-  const modalContent = $('.js--modal__content')
+  const slideItems = $(".js--gal_item");
+  const nextSlideBtn = $(".js--modal__next");
+  const prevSlideBtn = $(".js--modal__prev");
+  const modalContent = $(".js--modal__content");
+  const closeModalBtn = $('.js--modal__close')
+  
+  slideItems.on("click", function () {
+    $(".js--modal").addClass("active");
+    showNewSlide($(this))
+  });
 
+  nextSlideBtn.on("click", function () {
+    const currentItem = clearCurrentSlide();
+    showNewSlide(currentItem.next().length ? currentItem.next() : $(slideItems[0]))
+  });
 
-  slideItem.on('click', function (event) {
-    $(this).addClass('current')
-    let currentSlide = event.target
-    $('.js--modal').removeClass('modal').addClass('modal-active')
-    const currentModalSlide = currentSlide.cloneNode()
-    modalContent.append(currentModalSlide)
+  prevSlideBtn.on("click", function () {
+    const currentItem = clearCurrentSlide();
+    showNewSlide(currentItem.prev().length ? currentItem.prev() : $(slideItems[slideItems.length - 1]))
   })
 
+  const clearCurrentSlide = () => {
+    modalContent.empty();
+    const currentItem = $(".current");
+    currentItem.removeClass("current");
+    return currentItem;
+  }
 
-  nextSlideBtn.on('click', function () {
-    slideItem.closest('.current').next()
-    console.log(slideItem)
+  const showNewSlide = (item) => {
+    item.addClass("current");
+    const nextImage = item.find('img').clone();
+    modalContent.append(nextImage);
+  }
+  
+  closeModalBtn.on('click', function(){
+    $(".js--modal").removeClass('active')
+    clearCurrentSlide()
   })
-})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const attr = $(this).find('img').attr('src')
-
-// $('.js--modal').removeClass('modal').addClass('modal-active')
-// // modalContentImg.attr('src' , attr)
-
-
-
-
-// nextSlideBtn.on('click', function(){
-// modalContentImg('src', )
-// })
+});
 
